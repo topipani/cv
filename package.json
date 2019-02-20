@@ -1,0 +1,36 @@
+{
+  "name": "cv",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "setup": "npm install",
+    "clean": "rimraf dist",
+    "prebuild": "npm run clean",
+    "build:css": "node-sass ./src/scss/bundle.scss",
+    "build:css:uncompressed": "npm run build:css -- ./dist/bundle.css",
+    "build:css:min": "npm run build:css -- --output-style compressed ./dist/bundle.min.css",
+    "watch:css": "npm run build:css:uncompressed -- --watch",
+    "cpx:files": "cpx \"src/**/*.{html,js} \" dist --watch",
+    "cpx": "cpx \"src/**/*.{html,js}\" dist",
+    "dev": "npm run cpx && concurrently \"npm run cpx:files\" \"npm run watch:css\" \"npm run server\"",
+    "server": "browser-sync start --files \"dist/**/*.*\" --server ./dist --startPath=index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/topipani/cv.git"
+  },
+  "author": "Bognár Anna",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/topipani/cv/issues"
+  },
+  "homepage": "https://github.com/topipani/cv#readme",
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "concurrently": "^4.1.0",
+    "cpx": "^1.5.0",
+    "node-sass": "^4.11.0",
+    "rimraf": "^2.6.3"
+  },
+  "dependencies": {}
+}
